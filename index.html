@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Key Systems – Muligheter for Ringerike kommune</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#08203F;
+    --navy-2:#0E3260;
+    --teal:#0E9F6E;
+    --teal-lt:#4FD6A3;
+    --teal-soft:#E8F7F0;
+    --blue:#2E6BC6;
+    --blue-lt:#7FA8E8;
+    --blue-soft:#EAF1FC;
+    --amber:#E8A33D;
+    --ink:#10202F;
+    --muted:#61748A;
+    --line:#DEE6EE;
+    --wash:#F5F8FB;
+  }
+
+  .reveal{ font-family:'Inter',system-ui,sans-serif; color:var(--ink); }
+  .reveal .slides{ text-align:left; }
+  .reveal h1,.reveal h2,.reveal h3,.reveal h4{
+    font-family:'Inter',sans-serif; color:var(--navy); text-transform:none;
+    letter-spacing:-.025em; margin:0 0 .45em 0; line-height:1.12;
+  }
+  .reveal h1{ font-size:2.4em; font-weight:900; }
+  .reveal h2{ font-size:1.58em; font-weight:800; }
+  .reveal h3{ font-size:1em; font-weight:700; }
+  .reveal p,.reveal li{ line-height:1.45; }
+  .reveal strong{ color:var(--navy); font-weight:700; }
+
+  /* per-track accent */
+  section{ --k:var(--teal); --k-soft:var(--teal-soft); --k-lt:var(--teal-lt); --k-brd:#C6EBD9; }
+  section[data-track="O"]{ --k:var(--blue); --k-soft:var(--blue-soft); --k-lt:var(--blue-lt); --k-brd:#CFDFF7; }
+
+  .kicker{
+    display:inline-block; font-size:.4em; font-weight:800; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--k); margin-bottom:.75em;
+  }
+  .kicker.w{ color:var(--amber); }
+  .rule{ width:56px;height:4px;background:var(--k);border-radius:3px;margin:0 0 24px 0; }
+
+  /* ---------- Dark slides ---------- */
+  section.dark h1,section.dark h2,section.dark h3{ color:#fff; }
+  section.dark p,section.dark li{ color:#B7CADD; }
+  section.dark .kicker{ color:var(--k-lt); }
+  section.dark .rule{ background:var(--k-lt); }
+
+  .brand{ display:inline-flex; align-items:center; gap:13px; margin-bottom:28px; }
+  .brand .glyph{ width:42px;height:42px;border-radius:12px;background:var(--teal);
+    display:flex;align-items:center;justify-content:center;font-size:22px; }
+  .brand .wm{ font-weight:900;font-size:25px;color:#fff;letter-spacing:-.01em; }
+  .sub{ font-size:.66em;color:#B7CADD;margin-top:.5em; }
+  .meta{ margin-top:1.7em;font-size:.4em;color:#8AA3BC;letter-spacing:.07em; }
+  section.cover{ position:relative; height:100%; }
+  section.cover .sub .kicker{ font-size:.62em; letter-spacing:.2em; }
+  section.cover .meta{ position:absolute; left:0; bottom:6px; margin:0; }
+  .duo{ display:flex;gap:30px;margin-top:26px; }
+  .duo div{ font-size:.4em;font-weight:800;letter-spacing:.12em;text-transform:uppercase; }
+  .duo .a{ color:var(--teal-lt); } .duo .b{ color:var(--blue-lt); }
+
+  /* ---------- Use-case head ---------- */
+  .uc-head{ display:flex; align-items:center; gap:19px; margin-bottom:48px; }
+  .uc-num{
+    flex:0 0 60px;height:60px;border-radius:15px;
+    background:var(--k); color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.7em;font-weight:900;letter-spacing:-.02em;
+  }
+  .uc-head .t .kicker{ margin-bottom:.25em; }
+  .uc-head .t h2{ margin:0; }
+
+  /* ---------- Cards ---------- */
+  .grid{ display:grid; gap:17px; }
+  .g2{ grid-template-columns:repeat(2,1fr); }
+  .g3{ grid-template-columns:repeat(3,1fr); }
+
+  .card{ background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px 19px; }
+  .card h3{ font-size:.58em;margin:0 0 .4em 0; }
+  .card p{ font-size:.47em;color:var(--muted);margin:0;line-height:1.5; }
+  .card .ico{ font-size:1.45em;line-height:1; }
+  .card:has(.ico){ display:grid;grid-template-columns:auto 1fr;column-gap:17px;align-items:center; }
+  .card:has(.ico) .ico{ grid-row:1 / span 2;align-self:center; }
+  .card:has(.ico) h3{ grid-column:2;grid-row:1; }
+  .card:has(.ico) p{ grid-column:2;grid-row:2; }
+  .card.acc{ background:var(--k-soft);border-color:var(--k-brd);border-left:4px solid var(--k); }
+  .card.navy{ background:var(--navy);border-color:var(--navy); }
+  .card.navy h3{ color:#fff; } .card.navy p{ color:#B7CADD; }
+  .card.plan{ background:var(--wash);border-style:dashed;border-color:#C3D0DE; }
+  .badge{
+    display:inline-block;font-size:.32em;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    color:#A9741F;background:#FDF3E2;border:1px solid #F0D8AE;border-radius:999px;
+    padding:5px 12px;margin-left:14px;vertical-align:middle;
+  }
+  .card.plan h3::after{
+    content:'Planlagt';font-size:.5em;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--amber);background:#FDF3E4;border-radius:20px;padding:3px 9px;margin-left:9px;vertical-align:middle;
+  }
+
+  /* ---------- Scenario ---------- */
+  .scenario{
+    background:transparent;border-left:3px solid #E2C9A0;border-radius:0;
+    padding:2px 0 2px 16px; margin:46px 0 40px;
+  }
+  .scenario .lbl{
+    font-size:.32em;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+    color:#B08A4E;display:block;margin-bottom:5px;
+  }
+  .scenario p{ font-size:.42em;margin:0;color:var(--muted);line-height:1.5; }
+  .scenario + .doors{ margin-top:2px; }
+
+  /* ---------- Doors ---------- */
+  .doors{
+    display:flex;align-items:center;gap:11px;flex-wrap:wrap;
+    margin-top:18px;padding-top:15px;border-top:1px solid var(--line);
+  }
+  .doors .lbl{ font-size:.36em;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted); }
+  .tag{
+    font-size:.41em;font-weight:500;color:var(--muted);background:#F5F8FA;
+    border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+  }
+
+  /* ---------- Two-track index ---------- */
+  .tracks{ display:grid;grid-template-columns:1fr 1fr;gap:0 40px;margin-top:8px; }
+  .trk .th{ display:flex;align-items:baseline;gap:12px;padding-bottom:11px;border-bottom:2px solid; }
+  .trk.t .th{ border-color:var(--teal); } .trk.o .th{ border-color:var(--blue); }
+  .trk .th .tt{ font-size:.72em;font-weight:800;color:var(--navy);letter-spacing:-.02em; }
+  .trk .th .tc{ font-size:.34em;font-weight:800;letter-spacing:.14em;text-transform:uppercase; }
+  .trk.t .th .tc{ color:var(--teal); } .trk.o .th .tc{ color:var(--blue); }
+  .trk ol{ list-style:none;margin:0;padding:0; }
+  .trk ol li{ display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:.42em; }
+  .trk ol li .c{ font-weight:800;font-size:.85em;letter-spacing:.06em;flex:0 0 24px;padding-top:2px; }
+  .trk.t ol li .c{ color:var(--teal); } .trk.o ol li .c{ color:var(--blue); }
+  .trk ol li .x{ color:var(--ink);font-weight:600; }
+  .trk ol li .x i{ display:block;font-style:normal;color:var(--muted);font-size:.86em;margin-top:3px;font-weight:400; }
+  
+
+  /* ---------- Pills ---------- */
+  .pills{ display:flex;flex-wrap:wrap;gap:10px; }
+  .pill{
+    font-size:.45em;font-weight:600;color:var(--navy);background:#F3F7FA;
+    border:1px solid var(--line);border-radius:999px;padding:11px 18px;
+  }
+  .pill .e{ margin-right:8px; }
+
+  /* ---------- Questions ---------- */
+  .q{ display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line); }
+  .q:last-child{ border-bottom:none; }
+  .q .num{ flex:0 0 27px;height:27px;border-radius:50%;background:var(--k);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:.38em;font-weight:800; }
+  .q .txt{ font-size:.5em;line-height:1.4;padding-top:2px; }
+  .q .txt em{ display:block;font-style:normal;font-size:.82em;color:var(--muted);margin-top:3px; }
+
+  /* ---------- Steps ---------- */
+  .steps{ display:grid;grid-template-columns:repeat(4,1fr);gap:0; }
+  .step{ position:relative;padding:0 17px; }
+  .step .n{ font-size:.82em;font-weight:900;color:var(--teal);line-height:1; }
+  .step h3{ font-size:.53em;margin:9px 0 5px; }
+  .step p{ font-size:.41em;color:var(--muted);margin:0; }
+  .step:not(:last-child)::after{ content:'';position:absolute;right:0;top:6px;bottom:6px;width:1px;background:var(--line); }
+
+  .footnote{ font-size:.37em;color:var(--muted);margin-top:20px; }
+  section.dark .footnote{ color:#8AA3BC; }
+
+  .reveal .progress{ color:var(--teal); }
+  .reveal .slide-number{ background:transparent;color:var(--muted);font-size:14px; }
+  @media print{ .card,.scenario,.trk ol li{ break-inside:avoid; } }
+</style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<!-- COVER -->
+<section class="dark cover" data-background-gradient="linear-gradient(135deg,#08203F 0%,#0E3260 60%,#0B4A5C 100%)">
+  <div class="brand"><div class="glyph">🔑</div><div class="wm">Key Systems</div></div>
+  <h1>Funksjoner og muligheter</h1>
+  <p class="sub"><span class="kicker">Ringerike kommune</span></p>
+  <p class="meta">Key Systems AS</p>
+</section>
+
+<!-- INDEX -->
+<section>
+  <span class="kicker">Innhold</span>
+  <h2>To områder</h2>
+  <div class="rule"></div>
+  <div class="tracks">
+    <div class="trk t">
+      <div class="th"><span class="tt">Tilganger</span></div>
+      <ol>
+        <li><span class="c">01</span><span class="x">Digital adgang for ansatte og andre brukere<i>Tilgang uten fysiske nøkler</i></span></li>
+        <li><span class="c">02</span><span class="x">Midlertidig tilgang<i>Håndverkere, vikarer, gjester, leverandører</i></span></li>
+        <li><span class="c">03</span><span class="x">Utleie, lag og foreninger<i>Haller, gymsaler, kulturbygg</i></span></li>
+        <li><span class="c">04</span><span class="x">Deling av nøkler<i>La brukere dele nøkkelen videre</i></span></li>
+        <li><span class="c">05</span><span class="x">Sentral administrasjon<i>Brukere, bygg og dører ett sted</i></span></li>
+        <li><span class="c">06</span><span class="x">API-tilgang<i>Automatikk fra eksterne systemer</i></span></li>
+      </ol>
+    </div>
+    <div class="trk o">
+      <div class="th"><span class="tt">Oversikt</span></div>
+      <ol>
+        <li><span class="c">01</span><span class="x">Oversikt over dørstatus<i>Åpen, låst, alarmert</i></span></li>
+        <li><span class="c">02</span><span class="x">Oversikt over alarmstatus<i>Alarmsoner samlet i løsningen</i></span></li>
+        <li><span class="c">03</span><span class="x">Byggoversikt og kveldsstatus<i>Planlagt videreutvikling</i></span></li>
+        <li><span class="c">04</span><span class="x">Bedre oversikt og kontroll<i>Adgang, dør og alarm i ett bilde</i></span></li>
+        <li><span class="c">05</span><span class="x">Hvem har brukt bygget<i>Oversikt til enhver tid</i></span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER TILGANGER -->
+<section class="dark" data-background-gradient="linear-gradient(135deg,#08203F 0%,#0E3260 55%,#0B4A5C 100%)">
+  <span class="kicker">Område 1 · Seks muligheter</span>
+  <h2 style="font-size:2.1em">Tilganger</h2>
+  <div class="rule"></div>
+  <p style="font-size:.64em;max-width:70%">Hvem som slipper inn hvor – og hvordan tilgangene settes opp, deles og administreres.</p>
+</section>
+
+<!-- T1 -->
+<section>
+  <div class="uc-head">
+    <div class="uc-num">01</div>
+    <div class="t"><span class="kicker">Tilganger</span><h2>Digital adgang for ansatte og andre brukere</h2></div>
+  </div>
+  <div class="grid g2">
+    <div class="card acc"><span class="ico">📱</span><h3>Tilgang uten utlevering</h3><p>Gi tilgang til aktuelle bygg og dører uten utlevering av fysiske nøkler.</p></div>
+    <div class="card acc"><span class="ico">🎛️</span><h3>Administreres sentralt</h3><p>Tilgang kan administreres og fjernes sentralt.</p></div>
+  </div>
+  <div class="scenario">
+    <span class="lbl">Slik kan det se ut hos dere</span>
+    <p>En ansatt som jobber på tre ulike bygg trenger ikke tre nøkler – hun får tilgangene på telefonen, og de justeres når rollen endres.</p>
+  </div>
+  <div class="doors">
+    <span class="lbl">Treffer typisk</span>
+    <span class="tag">Administrasjonsbygg</span><span class="tag">Skoler</span><span class="tag">Barnehager</span><span class="tag">Driftsbygg</span>
+  </div>
+</section>
+
+<!-- T2 -->
+<section>
+  <div class="uc-head">
+    <div class="uc-num">02</div>
+    <div class="t"><span class="kicker">Tilganger</span><h2>Midlertidig tilgang</h2></div>
+  </div>
+  <div class="grid g2">
+    <div class="card acc"><span class="ico">🛠️</span><h3>Eksterne i en begrenset periode</h3><p>Gi håndverkere, leverandører, vikarer, gjester og andre eksterne tilgang i en begrenset periode.</p></div>
+    <div class="card acc"><span class="ico">📉</span><h3>Mindre nøkkeladministrasjon</h3><p>Reduserer behovet for utlån og oppfølging av fysiske nøkler.</p></div>
+  </div>
+  <div class="scenario">
+    <span class="lbl">Slik kan det se ut hos dere</span>
+    <p>Et rehabiliteringsprosjekt går over seks uker. Entreprenøren får tilgang i perioden – og ingen må jage nøkler i etterkant.</p>
+  </div>
+  <div class="doors">
+    <span class="lbl">Treffer typisk</span>
+    <span class="tag">Bygg under rehabilitering</span><span class="tag">Tekniske bygg</span><span class="tag">Lager</span><span class="tag">Alle bygg med eksterne</span>
+  </div>
+</section>
+
+<!-- T3 -->
+<section>
+  <div class="uc-head">
+    <div class="uc-num">03</div>
+    <div class="t"><span class="kicker">Tilganger</span><h2>Utleie, lag og foreninger</h2></div>
+  </div>
+  <div class="grid g2">
+    <div class="card acc"><span class="ico">🏀</span><h3>Kommunale lokaler</h3><p>Gi tilgang til eksempelvis idrettshaller, gymsaler, kulturbygg og andre kommunale lokaler.</p></div>
+    <div class="card acc"><span class="ico">⏱️</span><h3>Begrenset til bruksperioden</h3><p>Tilgangen kan begrenses til de tidspunktene lokalene skal benyttes.</p></div>
+  </div>
+  <div class="scenario">
+    <span class="lbl">Slik kan det se ut hos dere</span>
+    <p>Håndballaget trener tirsdag og torsdag. Trenerne får nøkkel som virker de kveldene – i stedet for at én person går med hallnøkkelen hele sesongen.</p>
+  </div>
+  <div class="doors">
+    <span class="lbl">Treffer typisk</span>
+    <span class="tag">Idrettshaller</span><span class="tag">Gymsaler</span><span class="tag">Kulturbygg</span><span class="tag">Utleielokaler</span><span class="tag">Skoler etter skoletid</span>
+  </div>
+</section>
+
+<!-- T4 -->
+<section>
+  <div class="uc-head">
+    <div class="uc-num">04</div>
+    <div class="t"><span class="kicker">Tilganger</span><h2>Deling av nøkler</h2></div>
+  </div>
+  <div class="grid g2">
+    <div class="card acc"><span class="ico">🔗</span><h3>Dere bestemmer</h3><p>Velg om en digital nøkkel kan deles videre – eller om den skal være låst til én person.</p></div>
+    <div class="card acc"><span class="ico">👥</span><h3>Mindre arbeid for administrator</h3><p>Ansvaret kan legges der det hører hjemme, uten at kommunen må registrere hver enkelt bruker.</p></div>
+  </div>
+  <div class="scenario">
+    <span class="lbl">Slik kan det se ut hos dere</span>
+    <p>Hovedtreneren i håndballaget deler sin nøkkel videre til hjelpetrenerne – uten at kommunen må opprette hver enkelt av dem.</p>
+  </div>
+  <div class="doors">
+    <span class="lbl">Treffer typisk</span>
+    <span class="tag">Idrettshaller</span><span class="tag">Bygg brukt av lag og foreninger</span><span class="tag">Utleielokaler</span><span class="tag">Kulturbygg</span>
+  </div>
+</section>
+
+<!-- T5 -->
+<section>
+  <div class="uc-head">
+    <div class="uc-num">05</div>
+    <div class="t"><span class="kicker">Tilganger</span><h2>Sentral administrasjon av bygg og dører</h2></div>
+  </div>
+  <div class="grid g2">
+    <div class="card acc"><span class="ico">🎚️</span><h3>Alt fra én løsning</h3><p>Administrator kan håndtere brukere, tilganger, bygg og dører fra én løsning.</p></div>
+    <div class="card acc"><span class="ico">🏢</span><h3>Utvides etter behov</h3><p>Nye bygg og dører kan legges til etter behov.</p></div>
+  </div>
+  <div class="scenario">
+    <span class="lbl">Slik kan det se ut hos dere</span>
+    <p>Én administrator har oversikt over hele porteføljen – og kan utvide bygg for bygg uten å bygge opp et nytt system hver gang.</p>
+  </div>
+  <div class="doors">
+    <span class="lbl">Treffer typisk</span>
+    <span class="tag">Hele byggporteføljen</span><span class="tag">Eiendomsavdelingen</span><span class="tag">Drift</span>
+  </div>
+</section>
+
+<!-- T6 -->
+<section>
+  <div class="uc-head">
+    <div class="uc-num">06</div>
+    <div class="t"><span class="kicker">Tilganger</span><h2>API-tilgang</h2></div>
+  </div>
+  <div class="grid g2">
+    <div class="card acc"><span class="ico">⚡</span><h3>Automatisk opprettelse</h3><p>La eksterne systemer opprette tilganger automatisk.</p></div>
+    <div class="card acc"><span class="ico">🔌</span><h3>Kobles mot deres systemer</h3><p>For eksempel bookingsystem for idrettshaller – bookingen gir tilgangen.</p></div>
+  </div>
+  <div class="scenario">
+    <span class="lbl">Slik kan det se ut hos dere</span>
+    <p>En forening booker hallen på nett. Tilgangen opprettes automatisk for det tidsrommet – uten at noen i kommunen trenger å gjøre noe.</p>
+  </div>
+  <div class="doors">
+    <span class="lbl">Treffer typisk</span>
+    <span class="tag">Idrettshaller</span><span class="tag">Utleielokaler</span><span class="tag">Møtelokaler</span><span class="tag">Kulturbygg</span>
+  </div>
+</section>
+
+<!-- DIVIDER OVERSIKT -->
+<section class="dark" data-track="O" data-background-gradient="linear-gradient(135deg,#08203F 0%,#12386B 55%,#1B4E8F 100%)">
+  <span class="kicker">Område 2 · Fem muligheter</span>
+  <h2 style="font-size:2.1em">Oversikt</h2>
+  <div class="rule"></div>
+  <p style="font-size:.64em;max-width:70%">Ikke bare hvem som kommer inn – men hva som faktisk skjer med byggene deres.</p>
+</section>
+
+<!-- O1 -->
+<section data-track="O">
+  <div class="uc-head">
+    <div class="uc-num">01</div>
+    <div class="t"><span class="kicker">Oversikt</span><h2>Oversikt over dørstatus</h2></div>
+  </div>
+  <div class="grid g2">
+    <div class="card acc"><span class="ico">🚪</span><h3>Åpen, låst, alarmert</h3><p>Administrator kan se status på dører direkte i løsningen.</p></div>
+    <div class="card acc"><span class="ico">🛰️</span><h3>Uten å reise ut</h3><p>Statusen leses av i løsningen – ingen må kjøre innom bygget for å sjekke.</p></div>
+  </div>
+  <div class="scenario">
+    <span class="lbl">Slik kan det se ut hos dere</span>
+    <p>En hovedinngang står åpen etter et arrangement. Det vises i løsningen – så avviket fanges opp med én gang.</p>
+  </div>
+  <div class="doors">
+    <span class="lbl">Treffer typisk</span>
+    <span class="tag">Hovedinnganger</span><span class="tag">Publikumsbygg</span><span class="tag">Haller ved arrangement</span>
+  </div>
+</section>
+
+<!-- O2 -->
+<section data-track="O">
+  <div class="uc-head">
+    <div class="uc-num">02</div>
+    <div class="t"><span class="kicker">Oversikt</span><h2>Oversikt over alarmstatus</h2></div>
+  </div>
+  <div class="grid g2">
+    <div class="card acc"><span class="ico">🚨</span><h3>Alarmsoner samlet</h3><p>Administratorer kan se alarmstatus for alarmsoner i organisasjonen samlet i løsningen.</p></div>
+    <div class="card acc"><span class="ico">⚡</span><h3>Ingen manuell kontroll</h3><p>Gir en rask oversikt uten at hvert enkelt bygg må kontrolleres manuelt.</p></div>
+  </div>
+  <div class="scenario">
+    <span class="lbl">Slik kan det se ut hos dere</span>
+    <p>I stedet for å ringe rundt eller logge inn i flere systemer, ser driftsleder alarmstatus for alle soner i én oversikt.</p>
+  </div>
+  <div class="doors">
+    <span class="lbl">Treffer typisk</span>
+    <span class="tag">Bygg med alarmanlegg</span><span class="tag">Skoler</span><span class="tag">Idrettsbygg</span><span class="tag">Administrasjonsbygg</span>
+  </div>
+</section>
+
+<!-- O3 -->
+<section data-track="O">
+  <div class="uc-head">
+    <div class="uc-num">03</div>
+    <div class="t"><span class="kicker">Oversikt</span><h2>Byggoversikt og kveldsstatus <span class="badge">Kommer</span></h2></div>
+  </div>
+  <div class="grid g3">
+    <div class="card acc"><h3>Samlet status per bygg</h3><p>Planlagt videreutvikling kan gi en samlet statusvisning per bygg.</p></div>
+    <div class="card acc"><h3>Kveldsstatus</h3><p>Se om bygget er alarmert når det ikke skal være aktivitet der – en enkel «kveldsstatus».</p></div>
+    <div class="card acc"><h3>Varsling ved avvik</h3><p>Mulighet for varsling når et bygg ikke har forventet status.</p></div>
+  </div>
+  <div class="scenario">
+    <span class="lbl">Slik kan det se ut hos dere</span>
+    <p>Klokka 23 ser vakthavende én liste: alle bygg som skal være tomme og alarmerte – og de få som ikke er det.</p>
+  </div>
+  <div class="doors">
+    <span class="lbl">Treffer typisk</span>
+    <span class="tag">Hele porteføljen</span><span class="tag">Vektertjeneste</span><span class="tag">Drift</span>
+  </div>
+</section>
+
+<!-- O4 -->
+<section data-track="O">
+  <div class="uc-head">
+    <div class="uc-num">04</div>
+    <div class="t"><span class="kicker">Oversikt</span><h2>Bedre oversikt og kontroll</h2></div>
+  </div>
+  <div class="grid g2">
+    <div class="card acc"><span class="ico">🧩</span><h3>Samlet informasjon</h3><p>Samler informasjon om adgang, dører og alarm i samme grensesnitt.</p></div>
+    <div class="card acc"><span class="ico">🎯</span><h3>Ett sted for driftspersonell</h3><p>Kan på sikt gi driftspersonell ett sted å kontrollere om byggene har forventet status.</p></div>
+  </div>
+  <div class="scenario">
+    <span class="lbl">Poenget</span>
+    <p>Jo flere bygg og dører som ligger inne, jo mer komplett blir bildet – og jo mer verdi gir oversikten.</p>
+  </div>
+  <div class="doors">
+    <span class="lbl">Treffer typisk</span>
+    <span class="tag">Eiendomsavdelingen</span><span class="tag">Vaktmestere</span><span class="tag">Driftspersonell</span><span class="tag">Hele bygningsmassen</span>
+  </div>
+</section>
+
+<!-- O5 -->
+<section data-track="O">
+  <div class="uc-head">
+    <div class="uc-num">05</div>
+    <div class="t"><span class="kicker">Oversikt</span><h2>Hvem har brukt bygget</h2></div>
+  </div>
+  <div class="grid g2">
+    <div class="card acc"><span class="ico">🕒</span><h3>Oversikt til enhver tid</h3><p>Se hvem som har brukt bygget – ikke bare hvem som har tilgang på papiret.</p></div>
+    <div class="card acc"><span class="ico">🔍</span><h3>Grunnlag for oppfølging</h3><p>Nyttig ved skader, avvik eller spørsmål om bruk av lokalene.</p></div>
+  </div>
+  <div class="scenario">
+    <span class="lbl">Slik kan det se ut hos dere</span>
+    <p>Det oppdages skade i gymsalen mandag morgen. I stedet for gjetting ser man hvem som faktisk brukte lokalet i helgen.</p>
+  </div>
+  <div class="doors">
+    <span class="lbl">Treffer typisk</span>
+    <span class="tag">Utleielokaler</span><span class="tag">Idrettshaller</span><span class="tag">Kulturbygg</span><span class="tag">Skoler</span>
+  </div>
+</section>
+
+<!-- BYGG -->
+<section>
+  <span class="kicker">Aktuelle bruksområder</span>
+  <h2>Bygg der løsningen er relevant</h2>
+  <div class="rule"></div>
+  <div class="pills">
+    <span class="pill"><span class="e">🏫</span>Skoler og barnehager</span>
+    <span class="pill"><span class="e">🏀</span>Idrettshaller og gymsaler</span>
+    <span class="pill"><span class="e">🎭</span>Kulturbygg</span>
+    <span class="pill"><span class="e">🔑</span>Kommunale utleielokaler</span>
+    <span class="pill"><span class="e">⚙️</span>Tekniske bygg og driftsbygg</span>
+    <span class="pill"><span class="e">📦</span>Lager</span>
+    <span class="pill"><span class="e">🏛️</span>Administrasjonsbygg</span>
+    <span class="pill"><span class="e">🤝</span>Bygg brukt av lag og foreninger</span>
+    <span class="pill"><span class="e">🛠️</span>Bygg med mye håndverkere og eksterne leverandører</span>
+  </div>
+  <div class="scenario" style="margin-top:24px">
+    <span class="lbl">Spørsmål til dere</span>
+    <p>Hvilke av disse har dere flest av – og hvor er nøkkelhåndteringen mest krevende i dag?</p>
+  </div>
+</section>
+
+<!-- SPØRSMÅL -->
+<section data-track="O">
+  <span class="kicker">Kartlegging</span>
+  <h2>Spørsmål som kan avdekke nye bruksområder</h2>
+  <div class="rule"></div>
+  <div class="q"><div class="num">1</div><div class="txt">Hvor bruker dere mye tid på administrasjon og utlevering av fysiske nøkler?<em>Ofte der brukervolumet er størst</em></div></div>
+  <div class="q"><div class="num">2</div><div class="txt">Hvilke bygg brukes av mange eksterne, lag eller foreninger?<em>Peker mot utleie og deling av nøkler</em></div></div>
+  <div class="q"><div class="num">3</div><div class="txt">Har dere systemer som burde opprette tilganger automatisk?<em>Peker mot API-tilgang</em></div></div>
+  <div class="q"><div class="num">4</div><div class="txt">Hvor er det vanskelig å få rask oversikt over dør- og alarmstatus?<em>Peker mot dør- og alarmoversikt</em></div></div>
+  <div class="q"><div class="num">5</div><div class="txt">Har drift eller vektertjeneste behov for å kontrollere at bygg er låst og alarmert på kveldstid?<em>Peker mot kveldsstatus og varsling</em></div></div>
+  <div class="q"><div class="num">6</div><div class="txt">Hvor har dere behov for å vite hvem som faktisk har brukt bygget?<em>Peker mot bruksoversikt</em></div></div>
+</section>
+
+<!-- NESTE -->
+<section>
+  <span class="kicker">Veien videre</span>
+  <h2>Fra bruksområde til bygg</h2>
+  <div class="rule"></div>
+  <div class="steps">
+    <div class="step"><div class="n">01</div><h3>Velg bruksområder</h3><p>Hvilke av de elleve er mest aktuelle for dere nå?</p></div>
+    <div class="step"><div class="n">02</div><h3>Koble til bygg</h3><p>Vi identifiserer hvilke bygg og dører hvert område treffer.</p></div>
+    <div class="step"><div class="n">03</div><h3>Prioriter</h3><p>Vi starter der effekten kommer raskest.</p></div>
+    <div class="step"><div class="n">04</div><h3>Utvid</h3><p>Nye bygg og dører legges til etter hvert.</p></div>
+  </div>
+  <div class="scenario" style="margin-top:26px">
+    <span class="lbl">Konkret forslag</span>
+    <p>Vi setter opp en kort kartlegging sammen: går gjennom byggporteføljen og markerer hvilke bygg som passer til hvilke bruksområder.</p>
+  </div>
+</section>
+
+<!-- SLUTT -->
+<section class="dark" data-background-gradient="linear-gradient(135deg,#08203F 0%,#0E3260 60%,#0B4A5C 100%)">
+  <div class="brand"><div class="glyph">🔑</div><div class="wm">Key Systems</div></div>
+  <span class="kicker">Til diskusjon</span>
+  <h1>Hvilke bruksområder<br>vil dere starte med?</h1>
+  <p class="sub">Vi tar utgangspunkt i deres bygg og deres behov.</p>
+  <p class="meta">Key Systems AS</p>
+</section>
+
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+Reveal.initialize({
+  hash:true, slideNumber:'c/t', transition:'slide', transitionSpeed:'fast',
+  width:1280, height:720, margin:0.06, center:false,
+  controls:true, progress:true, plugins:[RevealNotes]
+});
+</script>
+</body>
+</html>
